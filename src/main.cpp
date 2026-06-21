@@ -88,25 +88,20 @@ int main() {
             }
             boids[i].acceleration += separation * params.avoidFactor;
 
-            // Alignment
+            // Alignment and Cohesion
             Vec2 averageVelocity = Vec2(0, 0);
+            Vec2 averagePosition = Vec2(0, 0);
+
             for (int j = 0; j < neighbours.size(); j++) {
                 averageVelocity += neighbours[j].velocity;
+                averagePosition += neighbours[j].position;
             }
 
             if (neighbours.size() > 0) {
                 averageVelocity = averageVelocity / neighbours.size();
                 Vec2 desired = averageVelocity.normalized() * params.maxSpeed;
                 boids[i].acceleration += (desired - boids[i].velocity) * params.alignmentFactor;
-            }
 
-            // Cohesion
-            Vec2 averagePosition = Vec2(0, 0);
-            for (int j = 0; j < neighbours.size(); j++) {
-                averagePosition += neighbours[j].position;
-            }
-
-            if (neighbours.size() > 0) {
                 averagePosition = averagePosition / neighbours.size();
                 boids[i].acceleration += (averagePosition - boids[i].position) * params.cohesionFactor;
             }
