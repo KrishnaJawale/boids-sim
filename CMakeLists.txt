@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(raylib REQUIRED)
 
-add_executable(boids-sim src/main.cpp)
+add_executable(boids-sim src/main.cpp src/Ui.cpp)
 target_link_libraries(boids-sim PRIVATE raylib)

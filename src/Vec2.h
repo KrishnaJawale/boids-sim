@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 struct Vec2 {
     float x;
@@ -26,5 +27,21 @@ struct Vec2 {
 
     Vec2 operator/(const float& other) const {
         return { x / other, y / other };
+    }
+
+    float length() const {
+        return sqrt(x * x + y * y);
+    }
+
+    float lengthSquared() const {
+        return x * x + y * y;
+    }
+
+    Vec2 normalized() const {
+        float len = length();
+        if (len < 1e-6f) {
+            return { 0, 0 };
+        }
+        return *this / len;
     }
 };
